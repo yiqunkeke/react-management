@@ -1,0 +1,8 @@
+{
+  "name": "react-management",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/yiqunkeke/react-management.git",
+  "author": "lijingke <lijingke@haier.com>",
+  "license": "MIT"
+}
