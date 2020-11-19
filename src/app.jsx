@@ -96,6 +96,7 @@ class Component2 extends React.Component {
     }
 }
 
+// 组件间的组合方式
 class AppTitle extends React.Component {
     constructor(props) {
         super(props)
@@ -104,13 +105,13 @@ class AppTitle extends React.Component {
         return (
             <div>
                 <h1>{this.props.title}</h1>
+                {/* this.props.children是react中关键字 */}
                 <h2>{this.props.children}</h2>
             </div>
         )
     }
 }
 
-// 组件间的组合方式
 class App extends React.Component {
     render() {
         return (
@@ -127,7 +128,163 @@ class App extends React.Component {
     }
 }
 
+// 子组件改变父组件中的值
+// 场景：子组件要改变父组件中的背景颜色 
+class Child extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
+    render() {
+        return (
+            <div>
+                <h1>父组件的背景颜色：{this.props.bgColor}</h1>
+                <button onClick={() => this.handleClick() }>改变父组件颜色bgColor</button>
+            </div>
+        )
+    }
+
+    handleClick() {
+        // this.props.bgColor = 'red' // 报错，不可以更改父组件中传递过来的props。
+        this.props.changeColor('red')
+    }
+}
+
+class Father extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            bgColor: '#999'
+        }
+    }
+    render() {
+        return (
+            <div style={{background: this.state.bgColor}}>
+                {/* 解决办法： 在父组件中定义好改颜色的方法，传递给子组件，供子组件来调用此方法，从而修改父组件的颜色 */}
+                <Child bgColor={this.state.bgColor} changeColor={(color) => this.onBgColorChange(color)}/>
+            </div>
+        )
+    }
+
+    onBgColorChange(color) {
+        this.setState({
+            bgColor: color
+        })
+    }
+}
+
+// 兄弟组件之间的传值
+// 方式1-->状态提升到父组件中
+class Child1 extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>child1</h1>
+                <button onClick={() => this.handleClick() }>改变child2的颜色</button>
+            </div>
+        )
+    }
+
+    handleClick() {
+        this.props.changeChild2Color('red')
+    }
+}
+
+class Child2 extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <div style={{background: this.props.bgColor}}>
+                <h1>child2：{this.props.bgColor}</h1>
+            </div>
+        )
+    }
+
+}
+
+class FatherCom extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            child2BgColor: '#999'
+        }
+    }
+    render() {
+        return (
+            <div>
+                <Child1 changeChild2Color={(color) => this.changeChild2Color(color)}/>
+                <Child2 bgColor={this.state.child2BgColor}/>
+            </div>
+        )
+    }
+
+    changeChild2Color(color) {
+        this.setState({
+            child2BgColor: color
+        })
+    }
+}
+
+//  生命周期
+/**
+ *  Mouting：挂载阶段
+ *  Updating： 运行时阶段
+ *  Unmounting： 卸载阶段
+ *  Error Handling： 加载阶段的错误处理
+ */
+
+class LifeCircle extends React.Component {
+    constructor(props) {
+        super(props)
+        console.log(1, 'constructor')
+        this.state = {
+            data: 'old state'
+        }
+    }
+
+    componentWillMount() { // 异步可以写在这
+        console.log(2, 'willMount')
+    }
+
+    componentDidMount() {
+        console.log(4, 'didMount')
+    }
+
+    componentWillReceiveProps() {
+        console.log('willReceiveProps')
+    }
+
+    shouldComponentUpdate() {
+        console.log(5, 'shouldComponentUpdate')
+        return true
+    }
+
+    componentDidUpdate() {
+        console.log(6, 'didUpdate')
+    }
+    
+    handleClick() {
+        console.log('更新事件')
+        this.setState({
+            date: 'new state'
+        })
+    }
+
+    render() {
+        console.log(3, 'render')
+        return (<div>
+            生命周期
+            <button onClick={() => this.handleClick()}>更新组件</button>
+        </div>)
+    }
+}
 
 ReactDOM.render(
     <div>
@@ -135,6 +292,12 @@ ReactDOM.render(
         <Component2 name='ella'/>
         <hr></hr>
         <App/>
+        <hr></hr>
+        <Father/>
+        <hr></hr>
+        <FatherCom/>
+        <hr></hr>
+        <LifeCircle/>
     </div>,
     document.getElementById('app')
 )
