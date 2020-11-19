@@ -53,9 +53,11 @@ class Component2 extends React.Component {
         super(props) // props是父组件传递过来的参数，统一都放在props中了。注意：props是只读的。
         
         this.state = { // state 关键字是 react中内置的
-            name: 'coco'
+            name: 'coco',
+            age: 18
         }
     }
+
     render() {
         // 设置 state 数据 ---> this.setState({})
         setTimeout(() => {
@@ -67,11 +69,19 @@ class Component2 extends React.Component {
         return (
             <div>
                 {/* 获取 state 数据 ---> this.state.xxx */}
-                <h1>I am {this.state.name}.</h1>
+                <h1>I am {this.state.name}. I am {this.state.age} years old.</h1>
                 {/* 获取 父组件的传值 */}
                 <h1>Her name is {this.props.name}.</h1>
+                {/* 事件: 事件名小驼峰命名、 */}
+                <button onClick={() => this.handleClick() }>加一岁</button>
             </div>
         )
+    }
+
+    handleClick() {
+        this.setState({
+            age: this.state.age + 1
+        })
     }
 }
 
