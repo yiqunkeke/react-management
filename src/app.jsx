@@ -17,10 +17,25 @@ import 'font-awesome/css/font-awesome.min.css' // 10. 配置好 font-awesome 之
 import './index.css'  // 4. 配置好样式 style-loader 和 css-loader之后
 import './index.scss'  // 8. 配置好样式 sass-loader 之后
 
+let name = 'Coco'
+let flag = true
+let list = ['coco', 'qianqian', 'yiqun']
+
 ReactDOM.render(
     <div>
-        <i class="fa fa-address-book" aria-hidden="true"></i>
-        <h1>Hello, world!</h1>
+        <i className="fa fa-address-book" aria-hidden="true"></i>
+        {/* jsx、style、className、变量使用 */}
+        <h1 style={{color: "yellow"}} className="jsx">Hello, world! I am {name}.</h1>
+        {/* 条件判断 */}
+        {
+            flag ? <p>You are right</p> : <p>You are wrong</p>
+        }
+        {/* 数组循环 */}
+        {
+            list.map(item => {
+                return <p key={item}>I am {item}</p>
+            })
+        }
     </div>,
     document.getElementById('app')
 );

@@ -290,3 +290,141 @@ css文件放在css文件目录，js 放在 js文件目录
 "webpack-cli": "3.3.12",
 
 "webpack-dev-server": "^3.11.0"
+
+
+## React
+
+1. 视图层框架
+
+    * 一个构建用户界面的框架
+
+        把数据展示在DOM上、处理在DOM上触发的事件，把DOM事件返回给数据，在react中，这是两个分开的步骤。
+
+    * 声明式框架
+
+    * 数据驱动DOM，再用事件反馈给数据
+
+        注意，需要通过事件把DOM的变化反馈给数据。    
+
+2. 组件化
+
+    * 组件组合而不是继承
+
+        组合方式比继承更灵活
+
+    * state && props
+
+        **state就是react组件中的数据**，或者称之为状态
+
+        **props 用来进行父子组件通信**。    **子组件可以通过props拿到父组件传递进来的数据和方法**。  这里需要注意，在react中，**组件间的数据传递方式是从上到下的，就需要父组件在props 里把操作方法也传递给子组件，通过一种类似回调的方式让父组件发生改变。**
+
+    * 生命周期
+
+3. JSX表达式
+
+    用它来处理数据与DOM之间的关系，无需操作DOM
+
+    * 一种JS扩展的表达式
+
+    * 带有逻辑的标记语法，有别于HTML模板
+
+        带有逻辑的JSX，实际上相当于一个脚本，相比HTML 模板更灵活
+
+    * 对样式，逻辑表达式和事件的支持   
+
+4. 虚拟DOM
+
+    
+## React优点
+
+1. 简洁
+
+    单向数据流和组件化的方式，可以很大程度上降低问题的复杂度
+
+2. 灵活
+
+    一切都是JS
+
+3. 高效
+
+    虚拟DOM    
+
+
+## React缺点   
+
+1. 思维转换
+
+2. 依赖生态
+
+    react只是一个视图层框架，想要发挥巨大能量需要依赖它的生态系统，比如react-router、redux
+
+3. 更新频繁
+
+## 了解JSX语法
+
+1. 创建项目方式
+
+    * 在已有项目上添加
+
+    * 通过 create-react-app 建立
+
+2.  JSX 基本语法
+
+3. ReactDOM
+
+```js
+    ReactDOM.render(
+        jsx, 
+        document.getElementById('app')
+    )
+```    
+
+4. 样式处理
+    style={}
+    className
+
+5. 数据逻辑处理
+
+```js
+    import React from 'react'
+    import ReactDOM from 'react-dom'
+
+    import 'font-awesome/css/font-awesome.min.css' // 10. 配置好 font-awesome 之后 
+    import './index.css'  // 4. 配置好样式 style-loader 和 css-loader之后
+    import './index.scss'  // 8. 配置好样式 sass-loader 之后
+
+    let name = 'Coco'
+    let flag = true
+    let list = ['coco', 'qianqian', 'yiqun']
+
+    ReactDOM.render(
+        <div>
+            <i className="fa fa-address-book" aria-hidden="true"></i>
+            {/* jsx、style、className、变量使用 */}
+            <h1 style={{color: "yellow"}} className="jsx">Hello, world! I am {name}.</h1>
+            {/* 条件判断 */}
+            {
+                flag ? <p>You are right</p> : <p>You are wrong</p>
+            }
+            {/* 数组循环 */}
+            {
+                list.map(item => {
+                    return <p key={item}>I am {item}</p>
+                })
+            }
+        </div>,
+        document.getElementById('app')
+    );
+```
+
+## 了解React组件
+
+1. 组件基本结构
+
+2. state && props
+
+3. 事件处理
+
+4. 组件的组合方式
+
+5. 组件间的数据通信
