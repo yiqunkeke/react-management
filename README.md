@@ -428,3 +428,50 @@ css文件放在css文件目录，js 放在 js文件目录
 4. 组件的组合方式
 
 5. 组件间的数据通信
+
+详见 app.jsx
+
+
+## Router原理
+
+1. Router原理：
+
+    * 历史
+
+        通过入栈，出栈方式
+
+    * 跳转
+
+        界面跳转
+
+    * 事件
+
+        打开新页面、退回到上个页面
+
+
+2. 常见Router
+
+    * 页面Router
+
+        window.location.href="http://www.baidu.com"
+        history,back()
+
+    * Hash Router
+
+        只有页面的hash值发生变化，页面并没有重新加载。只是在当前页面的不同状态的hash值上跳转，后退的时候，也是跳到上一个hash状态。整个页面不会刷新。最早就是通过这种hash原理为实现单页应用的路由，兼容性不错。
+
+        window.location="#hash"
+
+    * H5 Router
+
+        既可以操作hash,也可以操作路径。但由于是H5提出的，所以兼容性比hash Router差一些
+
+## React-router
+
+1. React 官方提供的路由插件，单页应用必备
+
+2. 使用版本， react-router-dom
+
+3. 动态路由，纯react组件
+
+
