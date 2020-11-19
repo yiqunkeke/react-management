@@ -72,23 +72,69 @@ class Component2 extends React.Component {
                 <h1>I am {this.state.name}. I am {this.state.age} years old.</h1>
                 {/* 获取 父组件的传值 */}
                 <h1>Her name is {this.props.name}.</h1>
-                {/* 事件: 事件名小驼峰命名、 */}
+                {/* 事件: 事件名小驼峰命名、通过箭头函数修正作用域，目的使得函数体内能够正常访问this */}
                 <button onClick={() => this.handleClick() }>加一岁</button>
+                {/* 事件：通过事件获取DOM数据 */}
+                <input type="text" onChange={(e) => this.handleChange(e)}/>
             </div>
         )
     }
 
+    // 事件：通过事件修改state中数据
     handleClick() {
         this.setState({
             age: this.state.age + 1
         })
     }
+
+    // 事件：通过事件获取DOM中的数据
+    handleChange(e) {
+        console.log(e.target.value)
+        this.setState({
+            age: Number(e.target.value)
+        })
+    }
 }
+
+class AppTitle extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.children}</h2>
+            </div>
+        )
+    }
+}
+
+// 组件间的组合方式
+class App extends React.Component {
+    render() {
+        return (
+           <div>
+               {/* 容器组件 */}
+               <AppTitle title="App Title">
+                   <span>App Span</span>
+                   <a href="">App link</a>
+                </AppTitle>
+               {/* 单纯组件 */}
+               <Component/>
+           </div> 
+        )
+    }
+}
+
+
 
 ReactDOM.render(
     <div>
         <Component/>
         <Component2 name='ella'/>
+        <hr></hr>
+        <App/>
     </div>,
     document.getElementById('app')
 )
