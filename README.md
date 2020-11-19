@@ -234,3 +234,59 @@ module.exports = {
     // 安装 surl-loader 和 file-loader（配置参考webpack官网进行配置）
     yarn add url-loader file-loader -D
 ```
+
+10. 使用字体图标
+
+**在 yarn 官网上搜索 font-awesome**进行安装
+
+```js
+    yarn add font-awesome -S
+```
+安装好之后， 在 node_modules目录中，可以找到 **font-awesome**文件目录，里面包含 css、less、scss、fonts目录
+
+直接在入口文件app.jsx 中引入 font-awesome/css下的 `font-awesome.min.css`
+
+在font-awesome/fonts目录下有多种字体文件，包含：.eot, .svg, .ttf, .woff, .woff2, .otf 文件。这些文件，需要在webpack.config.js中配置file-loader才能被webpack解析。
+
+```js
+    { // font-awesome
+            test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+            use: ['url-loader'],
+          },
+```
+
+11. 关闭webpack的性能提示
+
+在webpack官网搜索 **performance**，可以关闭webpack在编译时对超出文件大小限制的提示
+
+```js
+    module.exports = {
+    //...
+    performance: {
+        hints: false
+    }
+    };
+```
+
+12. 给打包出的文件配置放置的目录
+
+css文件放在css文件目录，js 放在 js文件目录
+
+
+13. 配置 webpack-dev-server
+
+在webpack官网搜索 webpack-dev-server ，进行安装和配置
+
+```js
+    yarn add webpack-dev-server -D
+```
+
+**注意：如果webpack-dev-server报错，可能是 webpack-cli 与 webpack-dev-server 版本原因**
+
+**解决办法**： 把webpack-cli的版本降级，至3.3.12可以成功启动webpack-dev-server
+
+"webpack": "^5.5.1",
+
+"webpack-cli": "3.3.12",
+
+"webpack-dev-server": "^3.11.0"
