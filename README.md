@@ -474,4 +474,23 @@ css文件放在css文件目录，js 放在 js文件目录
 
 3. 动态路由，纯react组件
 
+4. 常用组件
 
+    *  <BrowserRouter> 和 <HashRouter>， 路由方式
+
+    *  <Route>，路由规则 ，假如在 Router里写了好几个Route，则这几个Route会一一匹配，最终匹配完才结束
+
+    *  <Switch>, 假如用 Switch 把多个 Route包起来， 则只有第一个符合规则的Route能被匹配到
+
+    *   <Link> 和 <NavLink> ，分别对应 跳转和导航
+
+    *   <Redirect>，自动跳转。在匹配到路径时，自动跳转。
+
+
+5. 安装使用
+
+**去react-router-dom官网上**，有专门的安装和使用教程
+
+```js
+    yarn add react-router-dom -S
+```

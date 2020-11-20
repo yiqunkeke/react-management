@@ -286,6 +286,52 @@ class LifeCircle extends React.Component {
     }
 }
 
+
+//  路由
+import {HashRouter as Router, Route, Link, Switch} from 'react-router-dom'
+
+class A extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        console.log(this.props.match.path)
+        return (
+            <div>
+                Component A
+            </div>
+        )
+    }
+}
+
+class B extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
+            <div>Component B</div>
+        )
+    }
+}
+
+class Wrapper extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
+            <div>
+                <Link to="/a">组件A</Link>
+                <br/>
+                <Link to="/b">组件B</Link>
+                {this.props.children} {/* this.props.children 表示用Wrapper组件包含的内容 */}
+                
+            </div>
+        )
+    }
+}
+
 ReactDOM.render(
     <div>
         <Component/>
@@ -298,6 +344,14 @@ ReactDOM.render(
         <FatherCom/>
         <hr></hr>
         <LifeCircle/>
+        <hr></hr>
+        <Router>
+            <Wrapper>
+                {/* 定义路由规则---> 使用Route，且规则是在组件内定义的 */}
+                <Route path="/a" component={A}></Route>
+                <Route path="/b" component={B}></Route>
+            </Wrapper>
+        </Router>
     </div>,
     document.getElementById('app')
 )
