@@ -11,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/app.js'
     },
+    devtool: 'eval-cheap-module-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       port: 8000,
@@ -78,7 +79,8 @@ module.exports = {
     },
     resolve: {
       alias: {
-        pages: path.join(__dirname, 'src/pages')
+        page: path.join(__dirname, 'src/page'),
+        component: path.join(__dirname, 'src/component'),
       },
       extensions: ['.js', '.jsx', '.json']
     }
