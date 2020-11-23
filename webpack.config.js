@@ -15,7 +15,10 @@ module.exports = {
       contentBase: path.join(__dirname, 'dist'),
       port: 8000,
       open: true,
-      hot: true
+      hot: true,
+      historyApiFallback: { // 404回退界面
+        index: '/dist/index.html'
+      }
     },
     module: {
         rules: [
@@ -73,4 +76,10 @@ module.exports = {
     performance: {
       hints:false //关闭 webpack 的性能提示
     },
+    resolve: {
+      alias: {
+        pages: path.join(__dirname, 'src/pages')
+      },
+      extensions: ['.js', '.jsx', '.json']
+    }
 };
