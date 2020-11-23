@@ -4,7 +4,7 @@ class PageTitle extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount() {
+  componentDidMount() {
       document.title = `${this.props.title}-HAPPY MMALL`
   }
   render() {
