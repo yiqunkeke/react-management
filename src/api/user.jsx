@@ -13,6 +13,7 @@ class User {
       data: info,
     });
   }
+
   // 校验登录接口字段
   checkLoginInfo(info) {
     let username = $.trim(info.username),
@@ -35,6 +36,14 @@ class User {
       status: true,
       msg: "验证通过",
     };
+  }
+
+  // 退出登录
+  logout() {
+    return _util.request({
+      url: "/user/logout.do",
+      type: "post",
+    });
   }
 }
 

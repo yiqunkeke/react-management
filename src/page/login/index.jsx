@@ -66,7 +66,9 @@ class Login extends React.Component {
         (res) => {
           // 登录成功后，再跳转至登录之前的页面
           console.log(this.state.redirect);
-          this.props.history.push(this.state.redirect);
+          console.log(res);
+          _util.setStorage("userInfo", res);
+          this.props.history.push(this.state.redirect); // this.props.history 是 react 提供的history 对象
         },
         (errMsg) => {
           // 错误处理提示

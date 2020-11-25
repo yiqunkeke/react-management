@@ -51,6 +51,36 @@ class Util {
   errorTips(errMsg) {
     alert(errMsg || "好像哪里不对了");
   }
+
+  // 设置localStorage // 封装：以支持json格式
+  setStorage(name, data) {
+    let dataType = typeof data;
+    if (dataType === "object") {
+      // 对象类型
+      window.localStorage.setItem(name, JSON.stringify(data));
+    } else if (["number", "string", "boolean"].indexOf(dataType) >= 0) {
+      // 简单类型
+      window.localStorage.setItem(name, data);
+    } else {
+      // 其他不支持的类型
+      alert("该类型不能用于本地存储");
+    }
+  }
+
+  // 获取localstorage
+  getStorage(name) {
+    let data = window.localStorage.getItem(name);
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return "";
+    }
+  }
+
+  // 删除 localstorage
+  removeStorage(name) {
+    window.localStorage.removeItem(name);
+  }
 }
 
 export default Util;
